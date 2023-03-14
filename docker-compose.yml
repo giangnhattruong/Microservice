@@ -1,0 +1,83 @@
+version: '3'
+
+services:
+  user-service:
+    container_name: user-service
+    build:
+      context: ./UserService
+      dockerfile: Dockerfile
+    ports:
+      - "8081:80"
+    environment:
+      - ConnectionStrings:UserServiceDatabase=Host=user-db;Port=5432;Database=user_service;Username=postgres;Password=postgres;
+    depends_on:
+      - user-db
+    networks:
+      - net001
+
+  user-db:
+    container_name: user-db
+    image: postgres
+    environment:
+      - POSTGRES_DB=user_service
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5440:5432'
+    networks:
+      - net001
+
+  product-service:
+    container_name: product-service
+    build:
+      context: ./ProductService
+      dockerfile: Dockerfile
+    ports:
+      - "8082:80"
+    environment:
+      - ConnectionStrings:ProductServiceDatabase=Host=product-db;Port=5432;Database=product_service;Username=postgres;Password=postgres;
+    depends_on:
+      - product-db
+    networks:
+      - net001
+
+  product-db:
+    container_name: product-db
+    image: postgres
+    environment:
+      - POSTGRES_DB=product_service
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5441:5432'
+    networks:
+      - net001
+
+  order-service:
+    container_name: order-service
+    build:
+      context: ./OrderService
+      dockerfile: Dockerfile
+    ports:
+      - "8083:80"
+    environment:
+      - ConnectionStrings:OrderServiceDatabase=Host=order-db;Port=5432;Database=order_service;Username=postgres;Password=postgres;
+    depends_on:
+      - order-db
+    networks:
+      - net001
+
+  order-db:
+    container_name: order-db
+    image: postgres
+    environment:
+      - POSTGRES_DB=order_service
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5442:5432'
+    networks:
+      - net001
+
+networks:
+  net001:
