@@ -16,19 +16,5 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasMany(u => u.Orders)
             .WithOne(o => o.User)
             .HasForeignKey(o => o.UserId);
-
-        builder.HasData
-        (
-            new User
-            {
-                Id = 1,
-                Name = "James"
-            },
-            new User
-            {
-                Id = 2,
-                Name = "Sarah"
-            }
-        );
     }
 }
