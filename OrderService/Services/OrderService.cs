@@ -57,6 +57,8 @@ public class OrderService : IOrderService
                 orderDetail.OrderId = orderModel.Id;
                 await _orderDetailRepository.AddAsync(orderDetail);
             }
+            
+            await _unitOfWork.CompleteAsync();
 
             return new BaseResponse<OrderDto>(_orderMapper.ToDto(orderModel));
         }

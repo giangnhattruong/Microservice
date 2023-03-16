@@ -35,6 +35,7 @@ public class UserService : IUserService
         {
             var userModel = _saveUserMapper.ToModel(user);
             await _userRepository.AddAsync(userModel);
+            await _unitOfWork.CompleteAsync();
 
             return new BaseResponse<UserDto>(_userMapper.ToDto(userModel));
         }

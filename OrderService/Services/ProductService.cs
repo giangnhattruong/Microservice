@@ -35,6 +35,8 @@ public class ProductService : IProductService
         {
             var productModel = _saveProductMapper.ToModel(product);
             await _productRepository.AddAsync(productModel);
+            
+            await _unitOfWork.CompleteAsync();
 
             return new BaseResponse<ProductDto>(_productMapper.ToDto(productModel));
         }
