@@ -1,0 +1,19 @@
+﻿using ProductService.Domain.Repositories;
+using ProductService.Persistence.Contexts;
+
+namespace ProductService.Persistence.Repositories;
+
+public class UnitOfWork : IUnitOfWork
+{
+    private readonly AppDbContext _context;
+
+    public UnitOfWork(AppDbContext context)
+    {
+        _context = context;
+    }
+    
+    public async Task CompleteAsync()
+    {
+        await _context.SaveChangesAsync();
+    }
+}
