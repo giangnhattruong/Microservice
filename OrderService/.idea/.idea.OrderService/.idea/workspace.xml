@@ -6,43 +6,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="76382f66-d5b7-4eaa-bb9f-0de5322a4275" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../ProductService/Domain/Controllers/BaseApiController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Domain/Controllers/CategoriesController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Domain/Controllers/Config/InvalidModelStateResponseFactory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Domain/Controllers/ProductsController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Domain/Repositories/ICategoryRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Domain/Repositories/IProductRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Domain/Repositories/IUnitOfWork.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Domain/Services/ICategoryService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Domain/Services/IProductService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Extensions/ModelStateExtension.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Mapper/ResourceToModelProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Persistence/Repositories/CategoryRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Persistence/Repositories/ProductRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Persistence/Repositories/UnitOfWork.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Resources/CategoryResource.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Resources/ErrorResource.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Resources/ProductResource.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Resources/SaveCategoryResource.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Resources/SaveProductResource.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Services/CategoryService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Services/Communication/BaseResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProductService/Services/ProductService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrderService/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrderService/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/OrdersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/OrdersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProductService/Domain/Models/Product.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/Domain/Models/Product.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProductService/Persistence/Contexts/Configurations/ProductConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/Persistence/Contexts/Configurations/ProductConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProductService/ProductService.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/ProductService.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProductService/Startup/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/Startup/DependencyInjection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProductService/obj/Debug/net6.0/ProductService.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/obj/Debug/net6.0/ProductService.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProductService/obj/Debug/net6.0/ProductService.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/obj/Debug/net6.0/ProductService.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProductService/obj/ProductService.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/obj/ProductService.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProductService/obj/ProductService.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/obj/ProductService.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProductService/obj/ProductService.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/obj/ProductService.csproj.nuget.g.targets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProductService/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProductService/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProductService/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/obj/project.packagespec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProductService/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/Contexts/Configurations/UserConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/Contexts/Configurations/UserConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Startup/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Startup/DependencyInjection.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +90,7 @@
       <workItem from="1678880362185" duration="2486000" />
       <workItem from="1678973841491" duration="3357000" />
       <workItem from="1679055382181" duration="613000" />
-      <workItem from="1679067265343" duration="767000" />
+      <workItem from="1679067265343" duration="1674000" />
     </task>
     <servers />
   </component>

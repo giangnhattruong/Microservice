@@ -75,7 +75,7 @@ public class ProductsController : BaseApiController
     /// <param name="id"></param>
     /// <param name="resource"></param>
     /// <returns></returns>
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<IActionResult> UpdateAsync(int id, [FromBody] SaveProductResource resource)
     {
         var product = _mapper.Map<SaveProductResource, Product>(resource);
@@ -95,7 +95,7 @@ public class ProductsController : BaseApiController
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> RemoveAsync(int id)
     {
         var response = await _productService.RemoveAsync(id);

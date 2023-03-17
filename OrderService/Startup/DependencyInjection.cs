@@ -1,4 +1,5 @@
-﻿using OrderService.Domain.Mapper;
+﻿using OrderService.Controllers.Config;
+using OrderService.Domain.Mapper;
 using OrderService.Domain.Repositories;
 using OrderService.Domain.Services;
 using OrderService.Mappers;
@@ -13,7 +14,11 @@ public static class DependencyInjection
     {
         // Add services to the container.
 
-        services.AddControllers();
+        services.AddControllers().ConfigureApiBehaviorOptions(options =>
+        {
+            options.InvalidModelStateResponseFactory = InvalidModelStateResponseFactory.ProduceErrorResponse;
+        });
+        
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
