@@ -15,6 +15,11 @@ public class OrderDetailMapper : IOrderDetailMapper
     
     public OrderDetailDto ToDto(OrderDetail model)
     {
+        if (model == null)
+        {
+            throw new ArgumentNullException(nameof(model));
+        }
+
         return new OrderDetailDto(_productMapper.ToDto(model.Product), model.Quantity);
     }
     

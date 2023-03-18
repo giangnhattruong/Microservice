@@ -8,6 +8,11 @@ public class ProductMapper : IProductMapper
 {
     public ProductDto ToDto(Product model)
     {
+        if (model == null)
+        {
+            throw new ArgumentNullException(nameof(model));
+        }
+        
         return new ProductDto(model.Id, model.Name, model.Price);
     }
     

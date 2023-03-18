@@ -15,6 +15,11 @@ public class SaveOrderMapper : ISaveOrderMapper
     
     public Order ToModel(SaveOrderDto dto)
     {
+        if (dto == null)
+        {
+            throw new ArgumentNullException(nameof(dto));
+        }
+
         var model = new Order();
         model.UserId = dto.UserId;
         model.OrderDetails = _saveOrderDetailMapper.ToListModels(dto.Products);

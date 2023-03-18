@@ -15,6 +15,11 @@ public class UserOrderMapper : IUserOrderMapper
     
     public UserOrderDto ToDto(Order model)
     {
+        if (model == null)
+        {
+            throw new ArgumentNullException(nameof(model));
+        }
+
         return new UserOrderDto(
             model.Id, 
             _orderDetailMapper.ToListDtos(model.OrderDetails),

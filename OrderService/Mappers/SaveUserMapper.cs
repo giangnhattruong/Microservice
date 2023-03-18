@@ -8,6 +8,11 @@ public class SaveUserMapper : ISaveUserMapper
 {
     public User ToModel(SaveUserDto dto)
     {
+        if (dto == null)
+        {
+            throw new ArgumentNullException(nameof(dto));
+        }
+
         var model = new User();
         model.Name = dto.Name;
 

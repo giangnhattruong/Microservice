@@ -8,6 +8,11 @@ public class SaveProductMapper : ISaveProductMapper
 {
     public Product ToModel(SaveProductDto dto)
     {
+        if (dto == null)
+        {
+            throw new ArgumentNullException(nameof(dto));
+        }
+
         var model = new Product();
         model.Name = dto.Name;
         model.Price = dto.Price;

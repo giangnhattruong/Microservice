@@ -8,6 +8,11 @@ public class GeneralUserMapper : IGeneralUserMapper
 {
     public GeneralUserDto ToDto(User model)
     {
+        if (model == null)
+        {
+            throw new ArgumentNullException(nameof(model));
+        }
+
         return new GeneralUserDto(model.Id, model.Name);
     }
 

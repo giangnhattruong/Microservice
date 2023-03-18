@@ -17,6 +17,11 @@ public class OrderMapper : IOrderMapper
     
     public OrderDto ToDto(Order model)
     {
+        if (model == null)
+        {
+            throw new ArgumentNullException(nameof(model));
+        }
+
         return new OrderDto(
             model.Id, 
             _userMapper.ToDto(model.User), 

@@ -8,6 +8,11 @@ public class SaveOrderDetailMapper : ISaveOrderDetailMapper
 {
     public OrderDetail ToModel(SaveOrderDetailDto dto)
     {
+        if (dto == null)
+        {
+            throw new ArgumentNullException(nameof(dto));
+        }
+
         var model = new OrderDetail();
         model.ProductId = dto.ProductId;
         model.Quantity = dto.Quantity;
