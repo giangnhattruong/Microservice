@@ -59,8 +59,11 @@ public class OrderService : IOrderService
             }
             
             await _unitOfWork.CompleteAsync();
+            
+            // Get new resource
+            var newOrder = await _orderRepository.GetAsync(orderModel.Id);
 
-            return new BaseResponse<OrderDto>(_orderMapper.ToDto(orderModel));
+            return new BaseResponse<OrderDto>(_orderMapper.ToDto(newOrder));
         }
         catch (Exception ex)
         {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProductService.Persistence.Contexts;
+using UserService.Persistence.Contexts;
 
-namespace ProductService.Startup;
+namespace UserService.Startup;
 
 public static class DatabaseMigration
 {

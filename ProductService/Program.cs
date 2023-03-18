@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add DB context
 builder.Services.AddDbContext<AppDbContext>(opt =>
-    opt.UseNpgsql(builder.Configuration.GetConnectionString("OrderServiceDatabase")));
+    opt.UseNpgsql(builder.Configuration.GetConnectionString("ProductServiceDatabase")));
 
 // Add services
 builder.Services.RegisterServices();
