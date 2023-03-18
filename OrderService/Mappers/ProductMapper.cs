@@ -6,12 +6,10 @@ namespace OrderService.Mappers;
 
 public class ProductMapper : IProductMapper
 {
-    public ProductDto ToDto(Product model)
+    public ProductDto? ToDto(Product model)
     {
         if (model == null)
-        {
-            throw new ArgumentNullException(nameof(model));
-        }
+            return null;
         
         return new ProductDto(model.Id, model.Name, model.Price);
     }

@@ -4,7 +4,7 @@ public class UserOrderDto : BaseDto
 {
     public int Id { get; set; }
     public ICollection<OrderDetailDto> Products { get; set; }
-    public decimal TotalAmount => Products?.Sum(op => op.Quantity * op.Product.Price) ?? 0;
+    public decimal TotalAmount => Products?.Sum(op => op?.Quantity ?? 0 * op?.Product?.Price ?? 0) ?? 0;
     public DateTime CreatedAt { get; set; }
 
     public UserOrderDto(int id, ICollection<OrderDetailDto> products, DateTime createdAt)
