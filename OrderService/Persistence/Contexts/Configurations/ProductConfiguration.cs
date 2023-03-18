@@ -17,5 +17,12 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.HasMany(p => p.OrderDetails)
             .WithOne(od => od.Product)
             .HasForeignKey(od => od.ProductId);
+
+        builder.HasData
+        (
+            new {Id = 1, Name = "Apple", Price = 3.20M},
+            new {Id = 2, Name = "Orange", Price = 5.70M},
+            new {Id = 3, Name = "Banana", Price = 8.45M}
+        );
     }
 }

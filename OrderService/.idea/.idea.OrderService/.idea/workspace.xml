@@ -6,10 +6,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="76382f66-d5b7-4eaa-bb9f-0de5322a4275" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/DTOs/GeneralUserDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Domain/Mapper/IGeneralUserMapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mappers/GeneralUserMapper.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrderService/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrderService/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/OrdersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/OrdersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DTOs/OrderDetailDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DTOs/OrderDetailDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DTOs/OrderDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DTOs/OrderDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DTOs/UserOrderDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DTOs/UserOrderDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/Mapper/IOrderDetailMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Mapper/IOrderDetailMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/Mapper/IOrderMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Mapper/IOrderMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/Mapper/IProductMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Mapper/IProductMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/Mapper/IUserMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Mapper/IUserMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/Mapper/IUserOrderMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Mapper/IUserOrderMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mappers/OrderDetailMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mappers/OrderDetailMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mappers/OrderMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mappers/OrderMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mappers/ProductMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mappers/ProductMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mappers/UserMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mappers/UserMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mappers/UserOrderMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mappers/UserOrderMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230314160356_FirstMigration.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230314160356_FirstMigration.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/AppDbContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/Contexts/Configurations/OrderConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/Contexts/Configurations/OrderConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/Contexts/Configurations/ProductConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/Contexts/Configurations/ProductConfiguration.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Persistence/Contexts/Configurations/UserConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/Contexts/Configurations/UserConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Startup/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Startup/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Startup/DatabaseMigration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Startup/DatabaseMigration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/OrderService.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/OrderService.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/OrderService.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/OrderService.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/OrderService.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/OrderService.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/System.CodeDom.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/System.CodeDom.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/OrderService.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/OrderService.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/OrderService.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/OrderService.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/OrderService.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/OrderService.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/OrderService.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/OrderService.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/ref/OrderService.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/ref/OrderService.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/refint/OrderService.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/refint/OrderService.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/staticwebassets.pack.sentinel" beforeDir="false" afterPath="$PROJECT_DIR$/obj/staticwebassets.pack.sentinel" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProductService/bin/Debug/net6.0/ProductService.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/bin/Debug/net6.0/ProductService.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProductService/bin/Debug/net6.0/ProductService.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/bin/Debug/net6.0/ProductService.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProductService/obj/Debug/net6.0/ProductService.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/obj/Debug/net6.0/ProductService.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProductService/obj/Debug/net6.0/ProductService.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/obj/Debug/net6.0/ProductService.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProductService/obj/Debug/net6.0/ref/ProductService.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/obj/Debug/net6.0/ref/ProductService.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProductService/obj/Debug/net6.0/refint/ProductService.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/obj/Debug/net6.0/refint/ProductService.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProductService/obj/staticwebassets.pack.sentinel" beforeDir="false" afterPath="$PROJECT_DIR$/../ProductService/obj/staticwebassets.pack.sentinel" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +129,8 @@
       <workItem from="1678880362185" duration="2486000" />
       <workItem from="1678973841491" duration="3357000" />
       <workItem from="1679055382181" duration="613000" />
-      <workItem from="1679067265343" duration="1674000" />
+      <workItem from="1679067265343" duration="3418000" />
+      <workItem from="1679108495582" duration="6152000" />
     </task>
     <servers />
   </component>

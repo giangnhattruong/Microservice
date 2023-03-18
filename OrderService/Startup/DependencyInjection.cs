@@ -36,6 +36,7 @@ public static class DependencyInjection
         services.AddScoped<IOrderDetailMapper, OrderDetailMapper>();
         services.AddScoped<IOrderMapper, OrderMapper>();
         services.AddScoped<IProductMapper, ProductMapper>();
+        services.AddScoped<IGeneralUserMapper, GeneralUserMapper>();
         services.AddScoped<IUserMapper, UserMapper>();
         services.AddScoped<IUserOrderMapper, UserOrderMapper>();
         services.AddScoped<ISaveOrderDetailMapper, SaveOrderDetailMapper>();

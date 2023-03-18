@@ -19,9 +19,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.HasData
         (
-            new {Id = 1000, Name = "James"},
-            new {Id = 1000, Name = "Steve"},
-            new {Id = 1000, Name = "Michael"}
+            new {Id = 1, Name = "James"},
+            new {Id = 2, Name = "Steve"},
+            new {Id = 3, Name = "Michael"}
         );
     }
 }

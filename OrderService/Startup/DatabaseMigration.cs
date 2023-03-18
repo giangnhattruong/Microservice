@@ -12,6 +12,7 @@ public static class DatabaseMigration
         try
         {
             var context = services.GetRequiredService<AppDbContext>();
+            context.Database.EnsureCreated();
             context.Database.Migrate();
         }
         catch (Exception ex)

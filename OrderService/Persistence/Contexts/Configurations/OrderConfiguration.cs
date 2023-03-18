@@ -11,7 +11,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
         builder.ToTable("Orders");
         builder.HasKey(o => o.Id);
         builder.Property(o => o.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Property(o => o.CreateAt).HasColumnType("datetime").IsRequired();
+        builder.Property(o => o.CreateAt).HasColumnType("timestamp").IsRequired();
 
         builder.HasOne(o => o.User)
             .WithMany(u => u.Orders)

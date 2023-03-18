@@ -64,7 +64,7 @@ public class OrderService : IOrderService
         }
         catch (Exception ex)
         {
-            return new BaseResponse<OrderDto>($"An error occurred: {ex.Message}");
+            return new BaseResponse<OrderDto>($"An error occurred: {ex.Message}\n Trace: {ex.StackTrace}");
         }
     }
     
