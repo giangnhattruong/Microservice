@@ -1,4 +1,5 @@
 ﻿using ProductService.Domain.Controllers.Config;
+using ProductService.Domain.Models;
 using ProductService.Domain.Repositories;
 using ProductService.Domain.Services;
 using ProductService.Persistence.Repositories;
@@ -29,6 +30,7 @@ public static class DependencyInjection
 
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<IProductService, Services.ProductService>();
+        services.AddScoped<IMessageProviderService<Product>, RabbitMqService<Product>>();
 
         return services;
     }

@@ -1,13 +1,14 @@
 version: '3'
 
 services:
-  # rabbitmq:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "5672:5672"
-  #     - "15672:15672"
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    ports:
+      - "5672:5672"
+      - "15672:15672"
 
   gateway:
     container_name: gateway

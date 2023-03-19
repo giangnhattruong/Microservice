@@ -21,6 +21,7 @@ public class UsersController : BaseApiController
         _mapper = mapper;
     }
 
+    [Authorize]
     [HttpGet]
     public async Task<IEnumerable<UserResource>> ListAsync()
     {

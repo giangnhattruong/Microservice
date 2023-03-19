@@ -24,37 +24,6 @@ public static class DependencyInjection
             options.InvalidModelStateResponseFactory = InvalidModelStateResponseFactory.ProduceErrorResponse;
         });
         
-        // Add identity service
-        services.AddIdentityCore<User>(options =>
-        {
-            options.SignIn.RequireConfirmedAccount = false;
-            options.User.RequireUniqueEmail = true;
-            options.Password.RequireDigit = false;
-            options.Password.RequiredLength = 6;
-            options.Password.RequireNonAlphanumeric = false;
-            options.Password.RequireUppercase = false;
-            options.Password.RequireLowercase = false;
-        }).AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
-        services.AddScoped<UserManager<User>>();
-        
-        services
-            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidAudience = configuration["Jwt:Audience"],
-                    ValidIssuer = configuration["Jwt:Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(configuration["Jwt:Secret"])
-                    )
-                };
-            });
-        
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
@@ -66,6 +35,7 @@ public static class DependencyInjection
 
         services.AddScoped<IUserService, Services.UserService>();
         services.AddScoped<ITokenService, JwtService>();
+        services.AddScoped<IMessageProviderService<User>, RabbitMqService<User>>();
 
         return services;
     }
