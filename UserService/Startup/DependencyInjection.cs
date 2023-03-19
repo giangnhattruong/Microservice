@@ -2,8 +2,10 @@
 using UserService.Controllers.Config;
 using UserService.Domain.Models;
 using UserService.Domain.Repositories;
+using UserService.Domain.Services;
 using UserService.Persistence.Contexts;
 using UserService.Persistence.Repositories;
+using UserService.Services;
 
 namespace UserService.Startup;
 
@@ -38,6 +40,10 @@ public static class DependencyInjection
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IUserRepository, UserRepository>();
+
+        services.AddScoped<IUserService, Services.UserService>();
+        services.AddScoped<ITokenService, JwtService>();
 
         return services;
     }

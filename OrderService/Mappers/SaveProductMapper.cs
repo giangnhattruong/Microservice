@@ -4,7 +4,7 @@ using OrderService.DTOs;
 
 namespace OrderService.Mappers;
 
-public class SaveProductMapper : ISaveProductMapper
+public class SaveProductMapper : IDtoToModelMapper<SaveProductDto, Product>
 {
     public Product ToModel(SaveProductDto dto)
     {
@@ -13,10 +13,11 @@ public class SaveProductMapper : ISaveProductMapper
             throw new ArgumentNullException(nameof(dto));
         }
 
-        var model = new Product();
-        model.Name = dto.Name;
-        model.Price = dto.Price;
+        return new Product()  {Name = dto.Name, Price = dto.Price};
+    }
 
-        return model;
+    public ICollection<Product> ToListModels(ICollection<SaveProductDto> dtos)
+    {
+        return dtos.Select(d => ToModel(d)).ToList();
     }
 }

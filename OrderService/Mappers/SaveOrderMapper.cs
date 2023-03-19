@@ -4,11 +4,11 @@ using OrderService.DTOs;
 
 namespace OrderService.Mappers;
 
-public class SaveOrderMapper : ISaveOrderMapper
+public class SaveOrderMapper : IDtoToModelMapper<SaveOrderDto, Order>
 {
-    private readonly ISaveOrderDetailMapper _saveOrderDetailMapper;
+    private readonly IDtoToModelMapper<SaveOrderDetailDto, OrderDetail> _saveOrderDetailMapper;
 
-    public SaveOrderMapper(ISaveOrderDetailMapper saveOrderDetailMapper)
+    public SaveOrderMapper(IDtoToModelMapper<SaveOrderDetailDto, OrderDetail> saveOrderDetailMapper)
     {
         _saveOrderDetailMapper = saveOrderDetailMapper;
     }
@@ -25,5 +25,10 @@ public class SaveOrderMapper : ISaveOrderMapper
         model.OrderDetails = _saveOrderDetailMapper.ToListModels(dto.Products);
 
         return model;
+    }
+
+    public ICollection<Order> ToListModels(ICollection<SaveOrderDto> dtos)
+    {
+        return dtos.Select(d => ToModel(d)).ToList();
     }
 }

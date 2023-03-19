@@ -4,30 +4,25 @@ using OrderService.DTOs;
 
 namespace OrderService.Mappers;
 
-public class UserOrderMapper : IUserOrderMapper
+public class UserOrderMapper : IModelToDtoMapper<Order, UserOrderDto>
 {
-    private readonly IOrderDetailMapper _orderDetailMapper;
+    private readonly IModelToDtoMapper<OrderDetail, OrderDetailDto> _orderDetailMapper;
 
-    public UserOrderMapper(IOrderDetailMapper orderDetailMapper)
+    public UserOrderMapper(IModelToDtoMapper<OrderDetail, OrderDetailDto> orderDetailMapper)
     {
         _orderDetailMapper = orderDetailMapper;
     }
     
-    public UserOrderDto ToDto(Order model)
+    public UserOrderDto? ToDto(Order? model)
     {
-        if (model == null)
-        {
-            throw new ArgumentNullException(nameof(model));
-        }
-
-        return new UserOrderDto(
+        return (model != null) ? new UserOrderDto(
             model.Id, 
             _orderDetailMapper.ToListDtos(model.OrderDetails),
-            model.CreateAt);
+            model.CreateAt) : null;
     }
     
-    public ICollection<UserOrderDto> ToListDtos(ICollection<Order> models)
+    public ICollection<UserOrderDto> ToListDtos(ICollection<Order>? models)
     {
-        return models.Select(model => ToDto(model)).ToList();
+        return models?.Select(model => ToDto(model)).ToList() ?? new List<UserOrderDto>();
     }
 }

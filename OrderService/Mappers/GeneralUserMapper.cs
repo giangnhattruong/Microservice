@@ -4,20 +4,15 @@ using OrderService.DTOs;
 
 namespace OrderService.Mappers;
 
-public class GeneralUserMapper : IGeneralUserMapper
+public class GeneralUserMapper : IModelToDtoMapper<User, GeneralUserDto>
 {
-    public GeneralUserDto ToDto(User model)
+    public GeneralUserDto? ToDto(User? model)
     {
-        if (model == null)
-        {
-            throw new ArgumentNullException(nameof(model));
-        }
-
-        return new GeneralUserDto(model.Id, model.Name);
+        return (model != null) ? new GeneralUserDto(model.Id, model.Name) : null;
     }
 
-    public ICollection<GeneralUserDto> ToListDtos(ICollection<User> models)
+    public ICollection<GeneralUserDto> ToListDtos(ICollection<User>? models)
     {
-        return models.Select(m => ToDto(m)).ToList();
+        return models?.Select(m => ToDto(m)).ToList() ?? new List<GeneralUserDto>();
     }
 }

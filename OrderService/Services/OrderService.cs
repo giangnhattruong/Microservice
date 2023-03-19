@@ -12,16 +12,16 @@ public class OrderService : IOrderService
     private readonly IUserRepository _userRepository;
     private readonly IOrderRepository _orderRepository;
     private readonly IOrderDetailRepository _orderDetailRepository;
-    private readonly IOrderMapper _orderMapper;
-    private readonly ISaveOrderMapper _saveOrderMapper;
+    private readonly IModelToDtoMapper<Order, OrderDto> _orderMapper;
+    private readonly IDtoToModelMapper<SaveOrderDto, Order> _saveOrderMapper;
     private readonly IUnitOfWork _unitOfWork;
 
     public OrderService(
         IUserRepository userRepository, 
         IOrderRepository orderRepository, 
         IOrderDetailRepository orderDetailRepository, 
-        IOrderMapper orderMapper, 
-        ISaveOrderMapper saveOrderMapper, 
+        IModelToDtoMapper<Order, OrderDto> orderMapper, 
+        IDtoToModelMapper<SaveOrderDto, Order> saveOrderMapper, 
         IUnitOfWork unitOfWork)
     {
         _userRepository = userRepository;

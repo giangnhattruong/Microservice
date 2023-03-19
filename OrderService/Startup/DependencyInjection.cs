@@ -1,7 +1,9 @@
 ﻿using OrderService.Controllers.Config;
 using OrderService.Domain.Mapper;
+using OrderService.Domain.Models;
 using OrderService.Domain.Repositories;
 using OrderService.Domain.Services;
+using OrderService.DTOs;
 using OrderService.Mappers;
 using OrderService.Persistence.Repositories;
 using OrderService.Services;
@@ -33,16 +35,16 @@ public static class DependencyInjection
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IUserService, UserService>();
 
-        services.AddScoped<IOrderDetailMapper, OrderDetailMapper>();
-        services.AddScoped<IOrderMapper, OrderMapper>();
-        services.AddScoped<IProductMapper, ProductMapper>();
-        services.AddScoped<IGeneralUserMapper, GeneralUserMapper>();
-        services.AddScoped<IUserMapper, UserMapper>();
-        services.AddScoped<IUserOrderMapper, UserOrderMapper>();
-        services.AddScoped<ISaveOrderDetailMapper, SaveOrderDetailMapper>();
-        services.AddScoped<ISaveOrderMapper, SaveOrderMapper>();
-        services.AddScoped<ISaveProductMapper, SaveProductMapper>();
-        services.AddScoped<ISaveUserMapper, SaveUserMapper>();
+        services.AddScoped<IModelToDtoMapper<OrderDetail, OrderDetailDto>, OrderDetailMapper>();
+        services.AddScoped<IModelToDtoMapper<Order, OrderDto>, OrderMapper>();
+        services.AddScoped<IModelToDtoMapper<Product, ProductDto>, ProductMapper>();
+        services.AddScoped<IModelToDtoMapper<User, GeneralUserDto>, GeneralUserMapper>();
+        services.AddScoped<IModelToDtoMapper<User, UserDto>, UserMapper>();
+        services.AddScoped<IModelToDtoMapper<Order, UserOrderDto>, UserOrderMapper>();
+        services.AddScoped<IDtoToModelMapper<SaveOrderDetailDto, OrderDetail>, SaveOrderDetailMapper>();
+        services.AddScoped<IDtoToModelMapper<SaveOrderDto, Order>, SaveOrderMapper>();
+        services.AddScoped<IDtoToModelMapper<SaveProductDto, Product>, SaveProductMapper>();
+        services.AddScoped<IDtoToModelMapper<SaveUserDto, User>, SaveUserMapper>();
 
         return services;
     }

@@ -4,18 +4,15 @@ using OrderService.DTOs;
 
 namespace OrderService.Mappers;
 
-public class ProductMapper : IProductMapper
+public class ProductMapper : IModelToDtoMapper<Product, ProductDto>
 {
-    public ProductDto? ToDto(Product model)
+    public ProductDto? ToDto(Product? model)
     {
-        if (model == null)
-            return null;
-        
-        return new ProductDto(model.Id, model.Name, model.Price);
+        return (model != null) ? new ProductDto(model.Id, model.Name, model.Price) : null;
     }
     
-    public ICollection<ProductDto> ToListDtos(ICollection<Product> models)
+    public ICollection<ProductDto> ToListDtos(ICollection<Product>? models)
     {
-        return models.Select(model => ToDto(model)).ToList();
+        return models?.Select(model => ToDto(model)).ToList() ?? new List<ProductDto>();
     }
 }

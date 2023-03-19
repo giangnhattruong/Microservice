@@ -1,37 +1,53 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using UserService.Resources;
 using UserService.Domain.Models;
+using UserService.Domain.Services;
 
 namespace UserService.Controllers;
 
 public class UsersController : BaseApiController
 {
-    private readonly UserManager<User> _userManager;
+    private readonly IUserService _userService;
 
     private readonly IMapper _mapper;
 
-    public UsersController(UserManager<User> userManager, IMapper mapper)
+    public UsersController(IUserService userService, IMapper mapper)
     {
-        _userManager = userManager;
+        _userService = userService;
         _mapper = mapper;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> RegisterUser([FromBody] SaveUserResource resource)
+    [HttpGet]
+    public async Task<IEnumerable<UserResource>> ListAsync()
     {
-        var user = new User() { UserName = resource.UserName, FullName = resource.UserName, Email = resource.Email };
+        var users = await _userService.ListAsync();
+        return _mapper.Map<IEnumerable<UserResource>>(users);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> RegisterUserAsync([FromBody] SaveUserResource resource)
+    {
+        var user = _mapper.Map<User>(resource);
         
-        var result = await _userManager.CreateAsync(
-            user, 
-            resource.Password);
+        var result = await _userService.RegisterAsync(user, resource.Password);
 
-        if (!result.Succeeded)
-            return BadRequest(result.Errors);
+        if (!result.Success)
+            return BadRequest(result.Message);
 
-        var createdResource = new UserResource() {Id = user.Id, Email = user.Email, FullName = user.FullName, UserName = user.UserName};
+        return Ok(result.Resource);
+    }
 
-        return Created("", createdResource);
+    [HttpPost("Login")]
+    public async Task<IActionResult> LoginAsync([FromBody] LoginResource resource)
+    {
+        var result = await _userService.LoginAsync(resource.UserName, resource.Password);
+
+        if (!result.Success)
+            return BadRequest(result.Message);
+
+        return Ok(result.Resource);
     }
 }

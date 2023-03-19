@@ -4,27 +4,22 @@ using OrderService.DTOs;
 
 namespace OrderService.Mappers;
 
-public class OrderDetailMapper : IOrderDetailMapper
+public class OrderDetailMapper : IModelToDtoMapper<OrderDetail, OrderDetailDto>
 {
-    private readonly IProductMapper _productMapper;
+    private readonly IModelToDtoMapper<Product, ProductDto> _productMapper;
 
-    public OrderDetailMapper(IProductMapper productMapper)
+    public OrderDetailMapper(IModelToDtoMapper<Product, ProductDto> productMapper)
     {
         _productMapper = productMapper;
     }
     
-    public OrderDetailDto ToDto(OrderDetail model)
+    public OrderDetailDto? ToDto(OrderDetail? model)
     {
-        if (model == null)
-        {
-            throw new ArgumentNullException(nameof(model));
-        }
-
-        return new OrderDetailDto(_productMapper.ToDto(model.Product), model.Quantity);
+        return (model != null) ? new OrderDetailDto(_productMapper.ToDto(model.Product), model.Quantity) : null;
     }
     
-    public ICollection<OrderDetailDto> ToListDtos(ICollection<OrderDetail> models)
+    public ICollection<OrderDetailDto> ToListDtos(ICollection<OrderDetail>? models)
     {
-        return models.Select(model => ToDto(model)).ToList();
+        return models?.Select(model => ToDto(model)).ToList() ?? new List<OrderDetailDto>();
     }
 }

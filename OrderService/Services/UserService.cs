@@ -10,11 +10,15 @@ namespace OrderService.Services;
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
-    private readonly IUserMapper _userMapper;
-    private readonly ISaveUserMapper _saveUserMapper;
+    private readonly IModelToDtoMapper<User, UserDto> _userMapper;
+    private readonly IDtoToModelMapper<SaveUserDto, User> _saveUserMapper;
     private readonly IUnitOfWork _unitOfWork;
 
-    public UserService(IUserRepository userRepository, IUserMapper userMapper, ISaveUserMapper saveUserMapper, IUnitOfWork unitOfWork)
+    public UserService(
+        IUserRepository userRepository, 
+        IModelToDtoMapper<User, UserDto> userMapper, 
+        IDtoToModelMapper<SaveUserDto, User> saveUserMapper, 
+        IUnitOfWork unitOfWork)
     {
         _userRepository = userRepository;
         _userMapper = userMapper;

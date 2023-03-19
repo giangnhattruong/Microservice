@@ -10,11 +10,15 @@ namespace OrderService.Services;
 public class ProductService : IProductService
 {
     private readonly IProductRepository _productRepository;
-    private readonly IProductMapper _productMapper;
-    private readonly ISaveProductMapper _saveProductMapper;
+    private readonly IModelToDtoMapper<Product, ProductDto> _productMapper;
+    private readonly IDtoToModelMapper<SaveProductDto, Product> _saveProductMapper;
     private readonly IUnitOfWork _unitOfWork;
 
-    public ProductService(IProductRepository productRepository, IProductMapper productMapper, ISaveProductMapper saveProductMapper, IUnitOfWork unitOfWork)
+    public ProductService(
+        IProductRepository productRepository, 
+        IModelToDtoMapper<Product, ProductDto> productMapper, 
+        IDtoToModelMapper<SaveProductDto, Product> saveProductMapper, 
+        IUnitOfWork unitOfWork)
     {
         _productRepository = productRepository;
         _productMapper = productMapper;

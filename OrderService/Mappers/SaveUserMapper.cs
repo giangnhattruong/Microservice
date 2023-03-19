@@ -4,7 +4,7 @@ using OrderService.DTOs;
 
 namespace OrderService.Mappers;
 
-public class SaveUserMapper : ISaveUserMapper
+public class SaveUserMapper : IDtoToModelMapper<SaveUserDto, User>
 {
     public User ToModel(SaveUserDto dto)
     {
@@ -13,9 +13,11 @@ public class SaveUserMapper : ISaveUserMapper
             throw new ArgumentNullException(nameof(dto));
         }
 
-        var model = new User();
-        model.Name = dto.Name;
+        return new User() {Name = dto.Name};
+    }
 
-        return model;
+    public ICollection<User> ToListModels(ICollection<SaveUserDto> dtos)
+    {
+        return dtos.Select(d => ToModel(d)).ToList();
     }
 }

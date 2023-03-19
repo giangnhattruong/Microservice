@@ -4,7 +4,7 @@ using OrderService.DTOs;
 
 namespace OrderService.Mappers;
 
-public class SaveOrderDetailMapper : ISaveOrderDetailMapper
+public class SaveOrderDetailMapper : IDtoToModelMapper<SaveOrderDetailDto, OrderDetail>
 {
     public OrderDetail ToModel(SaveOrderDetailDto dto)
     {
@@ -13,11 +13,7 @@ public class SaveOrderDetailMapper : ISaveOrderDetailMapper
             throw new ArgumentNullException(nameof(dto));
         }
 
-        var model = new OrderDetail();
-        model.ProductId = dto.ProductId;
-        model.Quantity = dto.Quantity;
-
-        return model;
+        return new OrderDetail() {ProductId = dto.ProductId, Quantity = dto.Quantity};
     }
     
     public ICollection<OrderDetail> ToListModels(ICollection<SaveOrderDetailDto> dtos)
