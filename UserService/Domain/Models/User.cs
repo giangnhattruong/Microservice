@@ -1,10 +1,8 @@
-﻿namespace UserService.Domain.Models;
+﻿using Microsoft.AspNetCore.Identity;
 
-public class User
+namespace UserService.Domain.Models;
+
+public class User : IdentityUser
 {
-    public int Id { get; set; }
-
-    public string Name { get; set; }
-    
-    public string Password { get; set; }
+    public string? FullName { get; set; }
 }

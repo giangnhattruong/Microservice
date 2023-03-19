@@ -8,6 +8,6 @@ public interface IUserService
 {
     Task<IEnumerable<UserDto>?> ListAsync();
     Task<BaseResponse<UserDto>> AddAsync(SaveUserDto user);
-    Task<BaseResponse<UserDto>> UpdateAsync(int id, SaveUserDto user);
-    Task<BaseResponse<UserDto>> RemoveAsync(int id);
+    Task<BaseResponse<UserDto>> UpdateAsync(string id, SaveUserDto user);
+    Task<BaseResponse<UserDto>> RemoveAsync(string id);
 }

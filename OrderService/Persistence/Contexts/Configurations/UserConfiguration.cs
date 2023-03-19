@@ -10,7 +10,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         builder.ToTable("Users");
         builder.HasKey(p => p.Id);
-        builder.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Property(p => p.Id).IsRequired();
         builder.Property(p => p.Name).IsRequired().HasMaxLength(255);
 
         builder.HasMany(u => u.Orders)
@@ -19,9 +19,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.HasData
         (
-            new {Id = 1, Name = "James"},
-            new {Id = 2, Name = "Steve"},
-            new {Id = 3, Name = "Michael"}
+            new {Id = Guid.NewGuid().ToString(), Name = "James"},
+            new {Id = Guid.NewGuid().ToString(), Name = "Steve"},
+            new {Id = Guid.NewGuid().ToString(), Name = "Michael"}
         );
     }
 }

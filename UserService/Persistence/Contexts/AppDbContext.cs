@@ -1,13 +1,13 @@
 ﻿using System.Reflection;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using UserService.Domain.Models;
 
 namespace UserService.Persistence.Contexts;
 
-public class AppDbContext : DbContext
+public class AppDbContext : IdentityUserContext<User>
 {
-    public DbSet<User> Users { get; set; }
-
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }

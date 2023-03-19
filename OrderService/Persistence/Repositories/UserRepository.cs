@@ -29,7 +29,7 @@ public class UserRepository : IUserRepository
         await _context.Users.AddAsync(user);
     }
     
-    public async Task<User?> GetAsync(int id)
+    public async Task<User?> GetAsync(string id)
     {
         return await _context.Users
             .Include(u => u.Orders)

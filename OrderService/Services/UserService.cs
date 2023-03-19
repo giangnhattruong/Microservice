@@ -45,7 +45,7 @@ public class UserService : IUserService
         }
     }
     
-    public async Task<BaseResponse<UserDto>> UpdateAsync(int id, SaveUserDto user) 
+    public async Task<BaseResponse<UserDto>> UpdateAsync(string id, SaveUserDto user) 
     {
         var existingUser = await _userRepository.GetAsync(id);
 
@@ -67,7 +67,7 @@ public class UserService : IUserService
         }
     }
     
-    public async Task<BaseResponse<UserDto>> RemoveAsync(int id) 
+    public async Task<BaseResponse<UserDto>> RemoveAsync(string id) 
     {
         var existingUser = await _userRepository.GetAsync(id);
 
