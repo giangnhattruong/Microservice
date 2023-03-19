@@ -9,4 +9,6 @@ public class UserResource
     public string? UserName { get; set; }
     
     public string? Email { get; set; }
+
+    public ICollection<RoleResource> Roles { get; set; } = new List<RoleResource>();
 }

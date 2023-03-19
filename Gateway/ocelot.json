@@ -1,0 +1,66 @@
+﻿{
+  "Routes":[
+    {
+      "DownstreamPathTemplate": "/api/v1.0/Users",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "user-service",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1.0/Users",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+    }, 
+    {
+      "DownstreamPathTemplate": "/api/v1.0/Users/Login",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "user-service",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1.0/Users/Login",
+      "UpstreamHttpMethod": [
+        "POST"
+      ]
+    },    
+    {
+      "DownstreamPathTemplate": "/api/v1.0/Products",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "product-service",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1.0/Products",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1.0/Categories",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "product-service",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1.0/Categories",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1.0/Orders",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "order-service",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1.0/Orders",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+    }
+  ]
+}

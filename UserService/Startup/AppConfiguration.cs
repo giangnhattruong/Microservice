@@ -14,6 +14,7 @@ public static class AppConfiguration
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
+        app.UseAuthentication();
 
         app.MapControllers();
 

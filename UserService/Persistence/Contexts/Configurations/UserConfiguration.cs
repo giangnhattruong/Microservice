@@ -12,6 +12,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.ToTable("AspNetUsers");
         builder.HasKey(u => u.Id);
         builder.Property(u => u.FullName).IsRequired(false).HasMaxLength(255);
+
+        builder.HasMany(u => u.Roles)
+            .WithMany(r => r.Users);
         
         builder.HasData(
             new User
@@ -23,7 +26,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                 Email = "james@example.com", 
                 NormalizedEmail = "JAMES@EXAMPLE.COM",
                 EmailConfirmed = true,
-                PasswordHash = new PasswordHasher<User>().HashPassword(null, "123456a@"),
+                PasswordHash = new PasswordHasher<User>().HashPassword(null, "123456a@")
             },
             new User
             {
