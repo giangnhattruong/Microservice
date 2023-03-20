@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualBasic;
+﻿using System.Text;
+using Newtonsoft.Json;
 using UserService.Domain.Models;
 using UserService.Domain.Repositories;
 using UserService.Domain.Services;
-using UserService.Persistence.Contexts;
 using UserService.Resources;
 using UserService.Services.Communication;
 
@@ -16,11 +16,18 @@ public class UserService : IUserService
 
     private readonly ITokenService _tokenService;
 
-    public UserService(IUnitOfWork unitOfWork, IUserRepository userRepository, ITokenService tokenService)
+    private readonly IMessageBrokerService _mqService;
+
+    public UserService(
+        IUnitOfWork unitOfWork, 
+        IUserRepository userRepository, 
+        ITokenService tokenService,
+        IMessageBrokerService mqService)
     {
         _unitOfWork = unitOfWork;
         _userRepository = userRepository;
         _tokenService = tokenService;
+        _mqService = mqService;
     }
 
     public async Task<ICollection<User>> ListAsync()
@@ -38,6 +45,8 @@ public class UserService : IUserService
                 return new BaseResponse<AuthTokenResource>("User already existed.");
             
             await _userRepository.RegisterAsync(user, password);
+            
+            SendMessage(user);
 
             var token = _tokenService.CreateToken(user);
             
@@ -45,8 +54,20 @@ public class UserService : IUserService
         }
         catch (Exception ex)
         {
-            return new BaseResponse<AuthTokenResource>($"An error occur when registering user: {ex.Message}");
+            return new BaseResponse<AuthTokenResource>($"An error occur when registering user: {ex.Message},\n Trace: {ex.StackTrace}");
         }
+    }
+
+    private void SendMessage(User user)
+    {
+        using var connection = _mqService.CreateChannel();
+        using var model = connection.CreateModel();
+        var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(user));
+        model.BasicPublish("UserExchange",
+            string.Empty,
+            true,
+            basicProperties: null,
+            body: body);
     }
 
     public async Task<BaseResponse<AuthTokenResource>> LoginAsync(string userName, string password)

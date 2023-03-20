@@ -35,7 +35,7 @@ public static class DependencyInjection
 
         services.AddScoped<IUserService, Services.UserService>();
         services.AddScoped<ITokenService, JwtService>();
-        services.AddScoped<IMessageProviderService<User>, RabbitMqService<User>>();
+        services.AddScoped<IMessageBrokerService, RabbitMqService>();
 
         return services;
     }

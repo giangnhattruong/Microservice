@@ -8,7 +8,7 @@ public class GeneralUserMapper : IModelToDtoMapper<User, GeneralUserDto>
 {
     public GeneralUserDto? ToDto(User? model)
     {
-        return (model != null) ? new GeneralUserDto(model.Id, model.Name) : null;
+        return (model != null) ? new GeneralUserDto(model.Id, model.FullName) : null;
     }
 
     public ICollection<GeneralUserDto> ToListDtos(ICollection<User>? models)

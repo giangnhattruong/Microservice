@@ -15,7 +15,7 @@ public class UserMapper : IModelToDtoMapper<User, UserDto>
     
     public UserDto? ToDto(User? model)
     {
-        return (model != null) ? new UserDto(model.Id, model.Name, _userOrderMapper.ToListDtos(model.Orders)) : null;
+        return (model != null) ? new UserDto(model.Id, model.FullName, _userOrderMapper.ToListDtos(model.Orders)) : null;
     }
     
     public ICollection<UserDto> ToListDtos(ICollection<User>? models)

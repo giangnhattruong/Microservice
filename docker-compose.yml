@@ -9,6 +9,8 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    networks:
+      - net001
 
   gateway:
     container_name: gateway
@@ -31,6 +33,7 @@ services:
       - ConnectionStrings:UserServiceDatabase=Host=user-db;Port=5432;Database=user_service;Username=postgres;Password=postgres;
     depends_on:
       - user-db
+      - rabbitmq
     networks:
       - net001
 
@@ -57,6 +60,7 @@ services:
       - ConnectionStrings:ProductServiceDatabase=Host=product-db;Port=5432;Database=product_service;Username=postgres;Password=postgres;
     depends_on:
       - product-db
+      - rabbitmq
     networks:
       - net001
 
@@ -83,6 +87,7 @@ services:
       - ConnectionStrings:OrderServiceDatabase=Host=order-db;Port=5432;Database=order_service;Username=postgres;Password=postgres;
     depends_on:
       - order-db
+      - rabbitmq
     networks:
       - net001
 

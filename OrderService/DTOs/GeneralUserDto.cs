@@ -4,11 +4,11 @@ public class GeneralUserDto
 {
     public string Id { get; set; }
     
-    public string Name { get; set; }
+    public string FullName { get; set; }
     
     public GeneralUserDto(string id, string name)
     {
         Id = id;
-        Name = name;
+        FullName = name;
     }
 }

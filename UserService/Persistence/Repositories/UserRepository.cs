@@ -22,7 +22,6 @@ public class UserRepository : IUserRepository
     public async Task RegisterAsync(User user, string password)
     {
         await _userManager.CreateAsync(user, password);
-        await _userManager.AddToRoleAsync(user, "Customer");
     }
 
     public async Task<User?> FindAsync(string userName, string password)

@@ -13,7 +13,7 @@ public class SaveUserMapper : IDtoToModelMapper<SaveUserDto, User>
             throw new ArgumentNullException(nameof(dto));
         }
 
-        return new User() {Name = dto.Name};
+        return new User() {FullName = dto.FullName};
     }
 
     public ICollection<User> ToListModels(ICollection<SaveUserDto> dtos)

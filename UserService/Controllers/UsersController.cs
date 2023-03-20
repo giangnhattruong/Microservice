@@ -29,7 +29,7 @@ public class UsersController : BaseApiController
         return _mapper.Map<IEnumerable<UserResource>>(users);
     }
 
-    [HttpPost]
+    [HttpPost("Register")]
     public async Task<IActionResult> RegisterUserAsync([FromBody] SaveUserResource resource)
     {
         var user = _mapper.Map<User>(resource);

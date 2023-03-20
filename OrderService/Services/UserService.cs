@@ -1,29 +1,41 @@
-﻿using OrderService.Domain.Mapper;
+﻿using System.Text;
+using Newtonsoft.Json;
+using OrderService.Domain.Mapper;
 using OrderService.Domain.Models;
 using OrderService.Domain.Repositories;
 using OrderService.Domain.Services;
 using OrderService.DTOs;
 using OrderService.Services.Communication;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 
 namespace OrderService.Services;
 
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
+    
     private readonly IModelToDtoMapper<User, UserDto> _userMapper;
+    
     private readonly IDtoToModelMapper<SaveUserDto, User> _saveUserMapper;
+    
     private readonly IUnitOfWork _unitOfWork;
+
+    private readonly IConfiguration _configuration;
 
     public UserService(
         IUserRepository userRepository, 
         IModelToDtoMapper<User, UserDto> userMapper, 
         IDtoToModelMapper<SaveUserDto, User> saveUserMapper, 
-        IUnitOfWork unitOfWork)
+        IUnitOfWork unitOfWork,
+        IConfiguration configuration
+    )
     {
         _userRepository = userRepository;
         _userMapper = userMapper;
         _saveUserMapper = saveUserMapper;
         _unitOfWork = unitOfWork;
+        _configuration = configuration;
     }
     
     public async Task<IEnumerable<UserDto>?> ListAsync()
@@ -56,7 +68,7 @@ public class UserService : IUserService
         if (existingUser == null)
             return new BaseResponse<UserDto>("Data not found.");
 
-        existingUser.Name = user.Name;
+        existingUser.FullName = user.FullName;
 
         try
         {
@@ -91,5 +103,4 @@ public class UserService : IUserService
             return new BaseResponse<UserDto>($"An error occurred: {ex.Message}");
         }
     }
-    
 }

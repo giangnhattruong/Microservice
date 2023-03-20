@@ -6,11 +6,11 @@ public class SaveUserDto : BaseDto
 {
     public string Id { get; set; }
     
-    public string Name { get; set; }
+    public string FullName { get; set; }
 
     public SaveUserDto(string id, string name)
     {
         Id = id;
-        Name = name;
+        FullName = name;
     }
 }
