@@ -15,5 +15,10 @@ public class ModelToResourceProfile : Profile
             .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
             .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName))
             .ForMember(dest => dest.Roles, opt => opt.MapFrom(src => src.Roles));
+
+        CreateMap<User, GeneralUserResource>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName));
+
     }
 }

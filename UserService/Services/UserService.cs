@@ -46,7 +46,7 @@ public class UserService : IUserService
             
             await _userRepository.RegisterAsync(user, password);
             
-            SendMessage(user);
+            SendMessage(new GeneralUserResource() {Id = user.Id, FullName = user.FullName});
 
             var token = _tokenService.CreateToken(user);
             
@@ -58,7 +58,7 @@ public class UserService : IUserService
         }
     }
 
-    private void SendMessage(User user)
+    private void SendMessage(GeneralUserResource user)
     {
         using var connection = _mqService.CreateChannel();
         using var model = connection.CreateModel();

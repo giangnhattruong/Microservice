@@ -10,7 +10,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/Users",
-      "UpstreamHttpMethod": ["GET", "PUT", "DELETE"]
+      "UpstreamHttpMethod": ["GET", "PUT", "DELETE"],
     },
     {
       "DownstreamPathTemplate": "/api/v1.0/Users/Register",
