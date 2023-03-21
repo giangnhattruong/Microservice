@@ -27,6 +27,8 @@ services:
     build:
       context: ./UserService
       dockerfile: Dockerfile
+    volumes:
+      - ./UserService/logs:/app/logs
     ports:
       - "8081:80"
     environment:
@@ -54,6 +56,8 @@ services:
     build:
       context: ./ProductService
       dockerfile: Dockerfile
+    volumes:
+      - ./ProductService/logs:/app/logs
     ports:
       - "8082:80"
     environment:
@@ -81,6 +85,8 @@ services:
     build:
       context: ./OrderService
       dockerfile: Dockerfile
+    volumes:
+      - ./OrderService/logs:/app/logs
     ports:
       - "8083:80"
     environment:
