@@ -7,16 +7,21 @@ namespace OrderService.Controllers;
 
 public class OrdersController : BaseApiController
 {
+    private readonly ILogger<OrdersController> _logger;
+    
     private readonly IOrderService _orderService;
 
-    public OrdersController(IOrderService orderService)
+    public OrdersController(ILogger<OrdersController> logger, IOrderService orderService)
     {
+        _logger = logger;
+        _logger.LogDebug(1, "NLog injected into HomeController");
         _orderService = orderService;
     }
 
     [HttpGet]
     public async Task<IEnumerable<OrderDto>?> ListAsync()
     {
+        _logger.LogInformation("HEY! YO!");
         return await _orderService.ListAsync();
     }
 

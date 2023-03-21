@@ -14,6 +14,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection RegisteredServices(this IServiceCollection services)
     {
+        var configuration = services.BuildServiceProvider().GetService<IConfiguration>();
         // Add services to the container.
 
         services.AddControllers().ConfigureApiBehaviorOptions(options =>
@@ -24,7 +25,7 @@ public static class DependencyInjection
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
-
+        
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
