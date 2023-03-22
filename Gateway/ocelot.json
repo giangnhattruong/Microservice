@@ -9,8 +9,13 @@
           "Port": 80
         }
       ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "UpstreamPathTemplate": "/api/v1.0/Users",
-      "UpstreamHttpMethod": ["GET", "PUT", "DELETE"],
+      "UpstreamHttpMethod": ["GET", "PUT", "DELETE"]
     },
     {
       "DownstreamPathTemplate": "/api/v1.0/Users/Register",
@@ -45,6 +50,11 @@
           "Port": 80
         }
       ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "UpstreamPathTemplate": "/api/v1.0/Products",
       "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE"]
     },
@@ -57,6 +67,11 @@
           "Port": 80
         }
       ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "UpstreamPathTemplate": "/api/v1.0/Categories",
       "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE"]
     },
@@ -69,6 +84,11 @@
           "Port": 80
         }
       ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "UpstreamPathTemplate": "/api/v1.0/Orders",
       "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE"]
     },
@@ -81,6 +101,11 @@
           "Port": 80
         }
       ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "UpstreamPathTemplate": "/api/v1.0/Orders/Users",
       "UpstreamHttpMethod": ["GET"]
     },
@@ -93,6 +118,11 @@
           "Port": 80
         }
       ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "UpstreamPathTemplate": "/api/v1.0/Orders/Products",
       "UpstreamHttpMethod": ["GET"]
     }

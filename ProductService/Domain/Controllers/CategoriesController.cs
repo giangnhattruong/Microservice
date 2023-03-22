@@ -8,12 +8,19 @@ namespace ProductService.Domain.Controllers;
 
 public class CategoriesController : BaseApiController
 {
+    private readonly ILogger<CategoriesController> _logger;
+    
     private readonly IMapper _mapper;
 
     private readonly ICategoryService _categoryService;
 
-    public CategoriesController(IMapper mapper, ICategoryService categoryService)
+    public CategoriesController(
+        ILogger<CategoriesController> logger,
+        IMapper mapper, 
+        ICategoryService categoryService)
     {
+        _logger = logger;
+        _logger.LogDebug(1, "NLog injected into HomeController");
         _mapper = mapper;
         _categoryService = categoryService;
     }

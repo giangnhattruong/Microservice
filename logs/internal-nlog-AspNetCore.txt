@@ -1,7 +1,0 @@
-2023-03-21 23:13:35.0383 Info Message Template Auto Format enabled
-2023-03-21 23:13:35.0526 Info Loading assembly: NLog.Web.AspNetCore
-2023-03-21 23:13:35.1137 Info Registered target NLog.Targets.FileTarget(Name=allfile)
-2023-03-21 23:13:35.1221 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
-2023-03-21 23:13:35.1263 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
-2023-03-21 23:13:35.1631 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=56, FilePath=/app/nlog.config
-2023-03-21 23:13:35.4873 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=56, FilePath=/app/nlog.config

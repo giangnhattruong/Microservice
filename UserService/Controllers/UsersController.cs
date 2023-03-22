@@ -11,12 +11,19 @@ namespace UserService.Controllers;
 
 public class UsersController : BaseApiController
 {
+    private readonly ILogger<UsersController> _logger;
+    
     private readonly IUserService _userService;
 
     private readonly IMapper _mapper;
 
-    public UsersController(IUserService userService, IMapper mapper)
+    public UsersController(
+        ILogger<UsersController> logger,
+        IUserService userService, 
+        IMapper mapper)
     {
+        _logger = logger;
+        _logger.LogDebug(1, "NLog injected into HomeController");
         _userService = userService;
         _mapper = mapper;
     }
