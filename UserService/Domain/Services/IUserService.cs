@@ -11,4 +11,6 @@ public interface IUserService
     Task<BaseResponse<AuthTokenResource>> RegisterAsync(User user, string password);
 
     Task<BaseResponse<AuthTokenResource>> LoginAsync(string userName, string password);
+    
+    Task<BaseResponse<AuthTokenResource>> RefreshTokenAsync(string token, string refreshToken);
 }

@@ -8,6 +8,8 @@ namespace UserService.Persistence.Contexts;
 
 public class AppDbContext : IdentityUserContext<User>
 {
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
+
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }

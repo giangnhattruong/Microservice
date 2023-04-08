@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using UserService.Resources;
+using Newtonsoft.Json;
+using UserService.Contracts.V1;
 using UserService.Domain.Models;
 using UserService.Domain.Services;
+using UserService.Resources;
 
-namespace UserService.Controllers;
+namespace UserService.Controllers.V1;
 
 public class UsersController : BaseApiController
 {
@@ -23,7 +23,7 @@ public class UsersController : BaseApiController
         IMapper mapper)
     {
         _logger = logger;
-        _logger.LogDebug(1, "NLog injected into HomeController");
+        _logger.LogDebug(1, "NLog injected into UsersController");
         _userService = userService;
         _mapper = mapper;
     }
@@ -36,7 +36,7 @@ public class UsersController : BaseApiController
         return _mapper.Map<IEnumerable<UserResource>>(users);
     }
 
-    [HttpPost("Register")]
+    [HttpPost(ApiRoutes.Users.Register)]
     public async Task<IActionResult> RegisterUserAsync([FromBody] SaveUserResource resource)
     {
         var user = _mapper.Map<User>(resource);
@@ -49,10 +49,21 @@ public class UsersController : BaseApiController
         return Ok(result.Resource);
     }
 
-    [HttpPost("Login")]
+    [HttpPost(ApiRoutes.Users.Login)]
     public async Task<IActionResult> LoginAsync([FromBody] LoginResource resource)
     {
         var result = await _userService.LoginAsync(resource.UserName, resource.Password);
+
+        if (!result.Success)
+            return BadRequest(result.Message);
+
+        return Ok(result.Resource);
+    }
+
+    [HttpPost(ApiRoutes.Users.RefreshToken)]
+    public async Task<IActionResult> RefreshTokenAsync([FromBody] RefreshTokenResource resource)
+    {
+        var result = await _userService.RefreshTokenAsync(resource.Token, resource.RefreshToken);
 
         if (!result.Success)
             return BadRequest(result.Message);

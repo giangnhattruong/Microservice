@@ -40,6 +40,18 @@
       ],
       "UpstreamPathTemplate": "/api/v1.0/Users/Login",
       "UpstreamHttpMethod": ["POST"]
+    },     
+    {
+      "DownstreamPathTemplate": "/api/v1.0/Users/RefreshToken",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "user-service",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1.0/Users/RefreshToken",
+      "UpstreamHttpMethod": ["POST"]
     },    
     {
       "DownstreamPathTemplate": "/api/v1.0/Products",

@@ -1,8 +1,11 @@
-﻿using System.Text;
+﻿using System.Security.Claims;
+using System.Text;
+using Microsoft.IdentityModel.JsonWebTokens;
 using Newtonsoft.Json;
 using UserService.Domain.Models;
 using UserService.Domain.Repositories;
 using UserService.Domain.Services;
+using UserService.Options;
 using UserService.Resources;
 using UserService.Services.Communication;
 
@@ -18,16 +21,21 @@ public class UserService : IUserService
 
     private readonly IMessageBrokerService _mqService;
 
+    private readonly IRefreshTokenRepository _refreshTokenRepository;
+
     public UserService(
         IUnitOfWork unitOfWork, 
         IUserRepository userRepository, 
         ITokenService tokenService,
-        IMessageBrokerService mqService)
+        IMessageBrokerService mqService,
+        IRefreshTokenRepository refreshTokenRepository
+        )
     {
         _unitOfWork = unitOfWork;
         _userRepository = userRepository;
         _tokenService = tokenService;
         _mqService = mqService;
+        _refreshTokenRepository = refreshTokenRepository;
     }
 
     public async Task<ICollection<User>> ListAsync()
@@ -48,7 +56,7 @@ public class UserService : IUserService
             
             SendMessage(new GeneralUserResource() {Id = user.Id, FullName = user.FullName});
 
-            var token = _tokenService.CreateToken(user);
+            var token = await _tokenService.CreateTokenAsync(user);
             
             return new BaseResponse<AuthTokenResource>(token);
         }
@@ -79,9 +87,53 @@ public class UserService : IUserService
             if (authenticatedUser == null)
                 return new BaseResponse<AuthTokenResource>("Invalid credentials.");
 
-            var token = _tokenService.CreateToken(authenticatedUser);
+            var token = await _tokenService.CreateTokenAsync(authenticatedUser);
 
             return new BaseResponse<AuthTokenResource>(token);
+        }
+        catch (Exception ex)
+        {
+            return new BaseResponse<AuthTokenResource>($"An error occur when logging: {ex.Message},\n Trace: {ex.StackTrace}");
+        }
+    }
+
+    public async Task<BaseResponse<AuthTokenResource>> RefreshTokenAsync(string token, string refreshToken)
+    {
+        try
+        {
+            var principal = _tokenService.GetPrincipalFromExpiredToken(token);
+            
+            if (principal == null)
+                return new BaseResponse<AuthTokenResource>("Invalid token");
+
+            var tokenExpiryUnix = long.Parse(principal.Claims.Single(p => p.Type == JwtRegisteredClaimNames.Exp).Value);
+            var tokenExpiryDate = new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(tokenExpiryUnix);
+
+            if (tokenExpiryDate > DateTime.Now)
+                return new BaseResponse<AuthTokenResource>("The access token has not expired yet.");
+
+            var jti = principal.Claims.Single(p => p.Type == JwtRegisteredClaimNames.Jti).Value;
+            var storedRefreshToken = await _refreshTokenRepository.FindByTokenAsync(refreshToken);
+
+            if
+            (
+                storedRefreshToken == null ||
+                storedRefreshToken.JwtId != jti ||
+                storedRefreshToken.ExpiryDate < DateTime.Now ||
+                storedRefreshToken.Invalidated ||
+                storedRefreshToken.Used
+            )
+                return new BaseResponse<AuthTokenResource>("Invalid refresh token.");
+
+            storedRefreshToken.Used = true;
+            _refreshTokenRepository.Update(storedRefreshToken);
+            await _unitOfWork.CompleteAsync();
+
+            var email = principal.Claims.Single(p => p.Type == ClaimTypes.Email).Value;
+            var user = await _userRepository.FindByEmailAsync(email);
+
+            var resource = await _tokenService.CreateTokenAsync(user);
+            return new BaseResponse<AuthTokenResource>(resource);
         }
         catch (Exception ex)
         {

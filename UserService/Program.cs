@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using NLog.Web;
-using RabbitMQ.Client.Core.DependencyInjection;
 using UserService.Domain.Models;
+using UserService.Options;
 using UserService.Persistence.Contexts;
 using UserService.Startup;
 using SetupBuilderExtensions = NLog.SetupBuilderExtensions;
@@ -17,6 +17,8 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
 
+    builder.Host.ConfigureAppSettings();
+    
     // Add DB context
     builder.Services.AddDbContext<AppDbContext>(opt =>
         opt.UseNpgsql(builder.Configuration.GetConnectionString("UserServiceDatabase")).EnableSensitiveDataLogging());
@@ -36,23 +38,34 @@ try
         options.Password.RequireLowercase = false;
     }).AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
     builder.Services.AddScoped<UserManager<User>>();
-            
+
+    var jwtSettings = builder.Configuration.GetRequiredSection("JwtSettings").Get<JwtSettings>();
+    builder.Services.AddSingleton(jwtSettings);
+
     // Add Authentication
-    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    builder.Services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
         .AddJwtBearer("Bearer", options =>
         {
+            options.SaveToken = true;
             options.TokenValidationParameters = new TokenValidationParameters()
             {
                 ValidateIssuer = true,
                 ValidateAudience = true,
                 ValidateLifetime = true,
+                RequireExpirationTime = true,
+                ClockSkew = TimeSpan.Zero,
                 ValidateIssuerSigningKey = true,
-                ValidAudience = builder.Configuration["Jwt:Audience"],
-                ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                ValidAudience = jwtSettings.Audience,
+                ValidIssuer = jwtSettings.Issuer,
                 IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"])
+                    Encoding.UTF8.GetBytes(jwtSettings.Secret)
                 )
-            };
+            };;
         });
 
     // Add Authorization
@@ -64,7 +77,6 @@ try
             policy.RequireRole("admin");
         });
     });
-
 
     var app = builder.Build();
 

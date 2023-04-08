@@ -7,8 +7,14 @@ public static class AppConfiguration
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
-            app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwagger(options =>
+            {
+                options.RouteTemplate = app.Configuration["SwaggerOptions:JsonRoute"];
+            });
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint(app.Configuration["SwaggerOptions:UIEndpoint"], app.Configuration["SwaggerOptions:Description"]);
+            });
         }
 
         app.UseHttpsRedirection();
