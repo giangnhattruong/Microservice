@@ -8,7 +8,7 @@ public interface IUserService
 {
     Task<ICollection<User>> ListAsync();
 
-    Task<BaseResponse<AuthTokenResource>> RegisterAsync(User user, string password);
+    Task<BaseResponse<AuthTokenResource>> RegisterAsync(SaveUserResource user);
 
     Task<BaseResponse<AuthTokenResource>> LoginAsync(string userName, string password);
     

@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using UserService.Contracts.V1;
+using UserService.Contracts.V1.Request;
+using UserService.Contracts.V1.Response;
 using UserService.Domain.Models;
 using UserService.Domain.Services;
 using UserService.Resources;
+using UserService.Validators;
 
 namespace UserService.Controllers.V1;
 
@@ -37,11 +40,27 @@ public class UsersController : BaseApiController
     }
 
     [HttpPost(ApiRoutes.Users.Register)]
-    public async Task<IActionResult> RegisterUserAsync([FromBody] SaveUserResource resource)
+    public async Task<IActionResult> RegisterUserAsync([FromBody] RegisterUserRequest request)
     {
-        var user = _mapper.Map<User>(resource);
+        var validator = new RegisterUserRequestValidator();
+        var validationResult = validator.Validate(request);
+        if (!validationResult.IsValid)
+        {
+            var errorResponse = new ErrorResponse();
+            
+            errorResponse.Errors = validationResult.Errors
+                .Select(e => new ErrorModel()
+                {
+                    Field = e.PropertyName,
+                    Messages = new List<string>() { e.ErrorMessage }
+                }).ToList();
+
+             return BadRequest(errorResponse.Errors);
+        }
         
-        var result = await _userService.RegisterAsync(user, resource.Password);
+        var resource = _mapper.Map<SaveUserResource>(request);
+
+        var result = await _userService.RegisterAsync(resource);
 
         if (!result.Success)
             return BadRequest(result.Message);

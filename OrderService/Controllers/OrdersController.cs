@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Grpc.Net.Client;
+using Microsoft.AspNetCore.Mvc;
 using OrderService.Domain.Mapper;
 using OrderService.Domain.Services;
 using OrderService.DTOs;
+using UserService.Grpc;
 
 namespace OrderService.Controllers;
 
@@ -56,5 +58,19 @@ public class OrdersController : BaseApiController
             return BadRequest(new ErrorDto(response.Message));
 
         return Ok(response.Resource);
+    }
+    
+    [HttpPost("test-grpc")]
+    public async Task<IActionResult> TestGrpcAsync()
+    {
+        using var channel = GrpcChannel.ForAddress("http://localhost:8081", new GrpcChannelOptions()
+        {
+            HttpClient = new HttpClient(new HttpClientHandler())
+        });
+        var client = new UserGrpc.UserGrpcClient(channel);
+
+        var grpcResponse = await client.ListAsync(new Empty());
+        
+        return Ok(grpcResponse);
     }
 }

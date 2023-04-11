@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -7,6 +8,7 @@ using UserService.Controllers.Config;
 using UserService.Domain.Models;
 using UserService.Domain.Repositories;
 using UserService.Domain.Services;
+using UserService.Filters;
 using UserService.Options;
 using UserService.Persistence.Contexts;
 using UserService.Persistence.Repositories;
@@ -23,12 +25,20 @@ public static class DependencyInjection
 
         var swaggerOptions = new SwaggerOptions();
         configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
-        
+
         services.AddControllers().ConfigureApiBehaviorOptions(options =>
         {
             options.InvalidModelStateResponseFactory = InvalidModelStateResponseFactory.ProduceErrorResponse;
         });
-        
+
+        services.AddGrpc();
+
+        services.AddMvc(options =>
+        {
+            options.EnableEndpointRouting = false;
+            options.Filters.Add<ValidationFilter>();
+        });
+
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(x =>

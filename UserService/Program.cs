@@ -22,7 +22,9 @@ try
     // Add DB context
     builder.Services.AddDbContext<AppDbContext>(opt =>
         opt.UseNpgsql(builder.Configuration.GetConnectionString("UserServiceDatabase")).EnableSensitiveDataLogging());
-
+        // builder.Services.AddDbContext<AppDbContext>(o => o.UseInMemoryDatabase("TestDb"));
+        
+        
     // Add services
     builder.Services.RegisterServices();
 

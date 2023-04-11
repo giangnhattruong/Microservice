@@ -1,0 +1,22 @@
+2023-04-11 22:00:52.9797 Info Message Template Auto Format enabled
+2023-04-11 22:00:52.9923 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-11 22:00:53.0764 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-11 22:00:53.0764 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2023-04-11 22:00:53.0764 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2023-04-11 22:00:53.2136 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=56, FilePath=F:\dotnet\HelloWorld\DotnetMicroservice\UserService\bin\Debug\net6.0\NLog.config
+2023-04-11 22:05:18.8896 Info Shutdown() called. Logger closing...
+2023-04-11 22:05:18.8896 Info Closing old configuration.
+2023-04-11 22:05:18.9230 Info Logger has been closed down.
+2023-04-11 22:05:18.9314 Info AppDomain Shutting down. LogFactory closing...
+2023-04-11 22:05:18.9314 Info LogFactory has been closed.
+2023-04-11 22:05:25.3146 Info Message Template Auto Format enabled
+2023-04-11 22:05:25.3238 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-11 22:05:25.3816 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-11 22:05:25.3829 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2023-04-11 22:05:25.3829 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2023-04-11 22:05:25.4100 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=56, FilePath=F:\dotnet\HelloWorld\DotnetMicroservice\UserService\bin\Debug\net6.0\NLog.config
+2023-04-11 22:07:08.9846 Info Shutdown() called. Logger closing...
+2023-04-11 22:07:08.9846 Info Closing old configuration.
+2023-04-11 22:07:09.0079 Info Logger has been closed down.
+2023-04-11 22:07:09.0079 Info AppDomain Shutting down. LogFactory closing...
+2023-04-11 22:07:09.0079 Info LogFactory has been closed.

@@ -24,6 +24,8 @@ public static class AppConfiguration
 
         app.MapControllers();
 
+        app.MapGrpcService<Services.UserService>();
+
         return app;
     }
 }

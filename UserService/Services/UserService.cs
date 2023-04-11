@@ -1,17 +1,20 @@
 ﻿using System.Security.Claims;
 using System.Text;
+using AutoMapper;
+using Grpc.Core;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Newtonsoft.Json;
 using UserService.Domain.Models;
 using UserService.Domain.Repositories;
 using UserService.Domain.Services;
+using UserService.Grpc;
 using UserService.Options;
 using UserService.Resources;
 using UserService.Services.Communication;
 
 namespace UserService.Services;
 
-public class UserService : IUserService
+public class UserService : UserGrpc.UserGrpcBase, IUserService
 {
     private readonly IUnitOfWork _unitOfWork;
     
@@ -23,12 +26,15 @@ public class UserService : IUserService
 
     private readonly IRefreshTokenRepository _refreshTokenRepository;
 
+    private readonly IMapper _mapper;
+
     public UserService(
         IUnitOfWork unitOfWork, 
         IUserRepository userRepository, 
         ITokenService tokenService,
         IMessageBrokerService mqService,
-        IRefreshTokenRepository refreshTokenRepository
+        IRefreshTokenRepository refreshTokenRepository,
+        IMapper mapper
         )
     {
         _unitOfWork = unitOfWork;
@@ -36,6 +42,7 @@ public class UserService : IUserService
         _tokenService = tokenService;
         _mqService = mqService;
         _refreshTokenRepository = refreshTokenRepository;
+        _mapper = mapper;
     }
 
     public async Task<ICollection<User>> ListAsync()
@@ -43,16 +50,32 @@ public class UserService : IUserService
         return await _userRepository.ListAsync();
     }
 
-    public async Task<BaseResponse<AuthTokenResource>> RegisterAsync(User user, string password)
+    public override async Task<ListUserGrpcResponse> List(Empty request, ServerCallContext context)
+    {
+        var users = await _userRepository.ListAsync();
+
+        var grpcResponseUserList = new ListUserGrpcResponse();
+        grpcResponseUserList.UserList.AddRange(users.Select(u => new UserGrpcResponse()
+        {
+            Id = u.Id,
+            Name = u.FullName
+        }));
+
+        return grpcResponseUserList;
+    }
+
+    public async Task<BaseResponse<AuthTokenResource>> RegisterAsync(SaveUserResource resource)
     {
         try
         {
+            var user = _mapper.Map<User>(resource);
+            
             var existingUser = await _userRepository.FindAsync(user.UserName);
 
             if (existingUser != null)
                 return new BaseResponse<AuthTokenResource>("User already existed.");
             
-            await _userRepository.RegisterAsync(user, password);
+            await _userRepository.RegisterAsync(user, resource.Password);
             
             SendMessage(new GeneralUserResource() {Id = user.Id, FullName = user.FullName});
 

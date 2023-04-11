@@ -8,5 +8,7 @@ public interface IRefreshTokenRepository
 
     Task<RefreshToken?> FindByTokenAsync(string token);
 
+    Task InvalidateUserTokens(string userId);
+
     void Update(RefreshToken token);
 }

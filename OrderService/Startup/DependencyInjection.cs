@@ -34,7 +34,7 @@ public static class DependencyInjection
         
         services.AddScoped<IOrderService, Services.OrderService>();
         services.AddScoped<IProductService, ProductService>();
-        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IUserService, Services.UserService>();
         services.AddSingleton<IMessageBrokerService, RabbitMqService>();
         services.AddScoped<IConsumerService, ConsumerService>();
         services.AddHostedService<ConsumerHostedService>();
